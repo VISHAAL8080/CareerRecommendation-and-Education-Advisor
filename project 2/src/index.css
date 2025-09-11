@@ -1,3 +1,208 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Animated Background Styles */
+.animated-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(59, 130, 246, 0.08) 0%, 
+    rgba(147, 51, 234, 0.08) 25%, 
+    rgba(236, 72, 153, 0.08) 50%, 
+    rgba(59, 130, 246, 0.08) 75%, 
+    rgba(147, 51, 234, 0.08) 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.animated-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Shooting Stars Container */
+.floating-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Shooting Star Effect */
+.particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 15px 4px rgba(59, 130, 246, 0.9);
+  animation: shootingStar var(--duration, 8s) ease-in-out infinite;
+  animation-delay: calc(var(--delay, 0) * 1s);
+  will-change: transform, opacity;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Randomly positioned shooting stars */
+.floating-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  --start-y: calc(var(--random-y, 0.5) * 100vh);
+  --drift: calc((var(--random-drift, 0.5) - 0.5) * 100px);
+  top: 0;
+  left: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Individual particle styles - Reduced to 8 stars for better visibility */
+.particle:nth-child(1) {
+  --random-y: 0.2;
+  --delay: 0;
+  --duration: 8s;
+  --random-drift: 0.3;
+}
+
+.particle:nth-child(2) {
+  --random-y: 0.35;
+  --delay: 4;
+  --duration: 7s;
+  --random-drift: -0.4;
+}
+
+.particle:nth-child(3) {
+  --random-y: 0.6;
+  --delay: 2;
+  --duration: 9s;
+  --random-drift: 0.2;
+}
+
+.particle:nth-child(4) {
+  --random-y: 0.75;
+  --delay: 6;
+  --duration: 8.5s;
+  --random-drift: -0.3;
+}
+
+.particle:nth-child(5) {
+  --random-y: 0.4;
+  --delay: 1;
+  --duration: 7.5s;
+  --random-drift: 0.4;
+}
+
+.particle:nth-child(6) {
+  --random-y: 0.85;
+  --delay: 5;
+  --duration: 8.2s;
+  --random-drift: -0.2;
+}
+
+.particle:nth-child(7) {
+  --random-y: 0.25;
+  --delay: 3;
+  --duration: 7.8s;
+  --random-drift: 0.3;
+}
+
+.particle:nth-child(8) {
+  --random-y: 0.9;
+  --delay: 7;
+  --duration: 8.8s;
+  --random-drift: -0.1;
+}
+
+/* Shooting star animation */
+@keyframes shootingStar {
+  0% { 
+    transform: translateX(-100px) translateY(var(--start-y)) scale(0.8);
+    opacity: 0;
+  }
+  10% { 
+    opacity: 1;
+    transform: translateX(0) translateY(calc(var(--start-y) + var(--drift))) scale(1);
+  }
+  90% { 
+    opacity: 1;
+  }
+  100% { 
+    transform: translateX(calc(100vw + 100px)) translateY(calc(var(--start-y) + (var(--drift) * 3))) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Create trail effect */
+.particle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 1), rgba(59, 130, 246, 0.9));
+  transform: translateX(-100px);
+  transform-origin: right center;
+  filter: blur(2px);
+  opacity: 0.9;
+}
+
+/* Purple shooting stars for variety */
+.particle:nth-child(even) {
+  box-shadow: 0 0 6px 2px rgba(147, 51, 234, 0.8);
+}
+
+.particle:nth-child(even)::before {
+  background: linear-gradient(90deg, transparent, rgba(147, 51, 234, 0.8), transparent);
+}
+
+/* Pink shooting stars */
+.particle:nth-child(3n) {
+  box-shadow: 0 0 6px 2px rgba(236, 72, 153, 0.8);
+}
+
+.particle:nth-child(3n)::before {
+  background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.8), transparent);
+}
+
+/* Larger shooting stars occasionally */
+.particle:nth-child(5n) {
+  width: 3px;
+  height: 3px;
+  box-shadow: 0 0 10px 3px rgba(59, 130, 246, 0.9);
+}
+
+.particle:nth-child(5n)::before {
+  width: 80px;
+  height: 2px;
+  transform: translateX(-80px) rotate(-45deg);
+}

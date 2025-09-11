@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Menu, X } from 'lucide-react';
+import { BookOpen, Menu, X, Sparkles, User } from 'lucide-react';
 
 interface HeaderProps {
   currentSection: string;

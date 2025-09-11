@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ChevronRight, ChevronLeft, CheckCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChevronRight, ChevronLeft, CheckCircle, Clock, Brain, Target, Lightbulb, Award, Sparkles } from 'lucide-react';
 
 interface QuizSectionProps {
   onComplete: (profile: any) => void;
@@ -9,6 +9,17 @@ const QuizSection: React.FC<QuizSectionProps> = ({ onComplete }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [showResults, setShowResults] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  useEffect(() => {
+    setSelectedOption(answers[currentQuestion] || null);
+  }, [currentQuestion, answers]);
 
   const questions = [
     {
@@ -85,7 +96,8 @@ const QuizSection: React.FC<QuizSectionProps> = ({ onComplete }) => {
     const profile = {
       answers,
       recommendations: getRecommendations(answers),
-      completedAt: new Date().toISOString()
+      completedAt: new Date().toISOString(),
+      needsDetailedProfile: true
     };
     setShowResults(true);
     onComplete(profile);
@@ -136,7 +148,29 @@ const QuizSection: React.FC<QuizSectionProps> = ({ onComplete }) => {
     const recommendations = getRecommendations(answers);
     
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 py-12">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 py-12 animated-bg">
+        <div className="floating-particles">
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+        </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-2xl shadow-lg p-8">
             <div className="text-center mb-8">
@@ -223,7 +257,29 @@ const QuizSection: React.FC<QuizSectionProps> = ({ onComplete }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 animated-bg">
+      <div className="floating-particles">
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+        <div className="particle"></div>
+      </div>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <div className="mb-8">
